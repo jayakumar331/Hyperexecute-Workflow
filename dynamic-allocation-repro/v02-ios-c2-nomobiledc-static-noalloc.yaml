@@ -5,20 +5,17 @@ concurrency: 2
 appium: true
 framework:
     name: appium
-tunnel: true
 globalTimeout: 20
 testSuiteTimeout: 20
 testSuiteStep: 20
 runtime:
     - language: python
       version: "3.11"
-env:
-    LT_TUNNEL: "true"
 pre:
     - pip3 install -r requirements.txt
 testDiscovery:
     type: raw
-    mode: static
+    mode: remote
     # two entries so autosplit creates 2 tasks and uses concurrency 2
     command: printf '%s\n' test_proverbial_app_flow proverbial_app_flow
 testRunnerCommand: python3 -m pytest tests -k "$test"
