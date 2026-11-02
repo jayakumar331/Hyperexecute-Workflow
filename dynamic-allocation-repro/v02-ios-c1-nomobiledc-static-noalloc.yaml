@@ -15,7 +15,7 @@ pre:
     - pip3 install -r requirements.txt
 testDiscovery:
     type: raw
-    mode: remote
+    mode: dynamic
     # same two entries as the c2 YAML, so concurrency is the only difference
     command: printf '%s\n' test_proverbial_app_flow proverbial_app_flow
 testRunnerCommand: python3 -m pytest tests -k "$test"
