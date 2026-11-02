@@ -1,22 +1,24 @@
-version: "0.2"
-runson: ios
+version: 0.1
+# Workflows discover tests on the VM, so keep YAML 0.1 with mode: remote.
+# YAML 0.2 finds 0 tests there and still reports the job as completed.
+# On YAML 0.1, runson: ios queues for an iOS VM; the test opens an Android
+# session, so it only needs linux.
+runson: linux
 autosplit: true
 concurrency: 2
 appium: true
-framework:
-    name: appium
 globalTimeout: 20
 testSuiteTimeout: 20
 testSuiteStep: 20
 runtime:
-    - language: python
-      version: "3.11"
+    language: python
+    version: "3.11"
 pre:
     - pip3 install -r requirements.txt
 testDiscovery:
     type: raw
-    mode: dynamic
+    mode: remote
     # two entries so autosplit creates 2 tasks and uses concurrency 2
     command: printf '%s\n' test_proverbial_app_flow proverbial_app_flow
 testRunnerCommand: python3 -m pytest tests -k "$test"
-jobLabel: ['HYP-RD', 'ios-runson', 'v0.2', 'c2', 'no-dynamicAllocation', 'no-mobileDC']
+jobLabel: ['HYP-RD', 'linux-runson', 'v0.1', 'c2', 'no-dynamicAllocation', 'no-mobileDC']
