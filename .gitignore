@@ -1,0 +1,15 @@
+# HyperExecute CLI binaries and generated output
+/hyperexecute
+/LT
+/hyperexecuteupdate
+/hyperexecute-cli.log
+/.updatedhyperexecute.yaml
+/.hyperexecute/
+/logs/
+
+# Python
+__pycache__/
+
+# IDE / OS
+.idea/
+.DS_Store

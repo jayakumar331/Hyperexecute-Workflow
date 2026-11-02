@@ -1,0 +1,31 @@
+version: 0.1
+# Abort if the job hasn't finished within 7 minutes
+globalTimeout: 7
+testSuiteTimeout: 7
+testSuiteStep: 7
+
+runson: linux
+
+autosplit: true
+concurrency: 1
+
+retryOnFailure: false
+maxRetries: 1
+
+appium: true
+
+runtime:
+  language: python
+  version: "3.11"
+
+pre:
+  - pip3 install -r requirements.txt
+
+testDiscovery:
+  type: raw
+  mode: static
+  command: grep -rho "def test_[a-zA-Z0-9_]*" tests | sed 's/def //'
+
+testRunnerCommand: python3 -m pytest tests -k "$test"
+
+jobLabel: ['HYP-RD', 'Android', 'pytest']

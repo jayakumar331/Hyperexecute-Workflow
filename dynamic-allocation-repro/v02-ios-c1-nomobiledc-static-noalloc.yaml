@@ -1,0 +1,25 @@
+version: "0.2"
+runson: ios
+autosplit: true
+concurrency: 1
+appium: true
+framework:
+    name: appium
+tunnel: true
+globalTimeout: 20
+testSuiteTimeout: 20
+testSuiteStep: 20
+runtime:
+    - language: python
+      version: "3.11"
+env:
+    LT_TUNNEL: "true"
+pre:
+    - pip3 install -r requirements.txt
+testDiscovery:
+    type: raw
+    mode: static
+    # same two entries as the c2 YAML, so concurrency is the only difference
+    command: printf '%s\n' test_proverbial_app_flow proverbial_app_flow
+testRunnerCommand: python3 -m pytest tests -k "$test"
+jobLabel: ['HYP-RD', 'ios-runson', 'v0.2', 'c1', 'no-dynamicAllocation', 'no-mobileDC']
